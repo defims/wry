@@ -63,7 +63,9 @@ fn main() -> wry::Result<()> {
   // The Webview2 developer tools include a memory inspector, which makes it easy to debug memory issues.
   webview.open_devtools();
 
-  let mut shared_buffer: Option<webview2_com::Microsoft::Web::WebView2::Win32::ICoreWebView2SharedBuffer> = None;
+  let mut shared_buffer: Option<
+    webview2_com::Microsoft::Web::WebView2::Win32::ICoreWebView2SharedBuffer,
+  > = None;
 
   event_loop.run(move |event, _, control_flow| {
     *control_flow = ControlFlow::Wait;
@@ -141,5 +143,5 @@ fn main() -> wry::Result<()> {
     {
       *control_flow = ControlFlow::Exit
     }
-  }); 
+  });
 }
