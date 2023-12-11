@@ -1099,15 +1099,11 @@ impl InnerWebView {
     object: *mut ::windows::Win32::System::Variant::VARIANT,
   ) -> ::windows::core::Result<()>
   where
-      P0: ::windows::core::IntoParam<::windows::core::PCWSTR>,
+    P0: ::windows::core::IntoParam<::windows::core::PCWSTR>,
   {
     match self.webview.cast::<ICoreWebView2_19>() {
-      Ok(webview) => {
-        webview.AddHostObjectToScript(name, object)
-      },
-      Err(error) => {
-        Err(error)
-      }
+      Ok(webview) => webview.AddHostObjectToScript(name, object),
+      Err(error) => Err(error),
     }
   }
 }

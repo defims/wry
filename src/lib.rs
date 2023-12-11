@@ -1411,7 +1411,7 @@ pub trait WebViewExtWindows {
     object: *mut ::windows::Win32::System::Variant::VARIANT,
   ) -> ::windows::core::Result<()>
   where
-      P0: ::windows::core::IntoParam<::windows::core::PCWSTR>;
+    P0: ::windows::core::IntoParam<::windows::core::PCWSTR>;
 }
 
 #[cfg(target_os = "windows")]
@@ -1432,7 +1432,9 @@ impl WebViewExtWindows for WebView {
     &self,
     name: P0,
     object: *mut ::windows::Win32::System::Variant::VARIANT,
-  ) -> ::windows::core::Result<()> where P0: ::windows::core::IntoParam<::windows::core::PCWSTR>,
+  ) -> ::windows::core::Result<()>
+  where
+    P0: ::windows::core::IntoParam<::windows::core::PCWSTR>,
   {
     self.webview.add_host_object_to_script(name, object)
   }
