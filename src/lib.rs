@@ -1412,6 +1412,25 @@ pub trait WebViewExtWindows {
   ) -> ::windows::core::Result<()>
   where
     P0: ::windows::core::IntoParam<::windows::core::PCWSTR>;
+
+  unsafe fn create_shared_buffer(
+    &self,
+    size: u64,
+  ) -> ::windows::core::Result<
+    webview2_com::Microsoft::Web::WebView2::Win32::ICoreWebView2SharedBuffer,
+  >;
+
+  unsafe fn post_shared_buffer_to_script<P0, P1>(
+    &self,
+    sharedbuffer: P0,
+    access: webview2_com::Microsoft::Web::WebView2::Win32::COREWEBVIEW2_SHARED_BUFFER_ACCESS,
+    additionaldataasjson: P1,
+  ) -> ::windows::core::Result<()>
+  where
+    P0: ::windows::core::IntoParam<
+      webview2_com::Microsoft::Web::WebView2::Win32::ICoreWebView2SharedBuffer,
+    >,
+    P1: ::windows::core::IntoParam<::windows::core::PCWSTR>;
 }
 
 #[cfg(target_os = "windows")]
@@ -1437,6 +1456,32 @@ impl WebViewExtWindows for WebView {
     P0: ::windows::core::IntoParam<::windows::core::PCWSTR>,
   {
     self.webview.add_host_object_to_script(name, object)
+  }
+
+  unsafe fn create_shared_buffer(
+    &self,
+    size: u64,
+  ) -> ::windows::core::Result<
+    webview2_com::Microsoft::Web::WebView2::Win32::ICoreWebView2SharedBuffer,
+  > {
+    self.webview.create_shared_buffer(size)
+  }
+
+  unsafe fn post_shared_buffer_to_script<P0, P1>(
+    &self,
+    sharedbuffer: P0,
+    access: webview2_com::Microsoft::Web::WebView2::Win32::COREWEBVIEW2_SHARED_BUFFER_ACCESS,
+    additionaldataasjson: P1,
+  ) -> ::windows::core::Result<()>
+  where
+    P0: ::windows::core::IntoParam<
+      webview2_com::Microsoft::Web::WebView2::Win32::ICoreWebView2SharedBuffer,
+    >,
+    P1: ::windows::core::IntoParam<::windows::core::PCWSTR>,
+  {
+    self
+      .webview
+      .post_shared_buffer_to_script(sharedbuffer, access, additionaldataasjson)
   }
 }
 
